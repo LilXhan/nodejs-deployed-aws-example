@@ -21,7 +21,8 @@ app.use('*', (req, res) => {
   res.status(400).send('not found')
 });
 
+const IP = process.env.NODE_ENV === 'production' ? process.env.IP_PROD : process.env.IP_DEV;
 
 const serverHttp = createServer(app);
 
-serverHttp.listen(process.env.HTTP_PORT, process.env.IP);
+serverHttp.listen(process.env.HTTP_PORT, IP);

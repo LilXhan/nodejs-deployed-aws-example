@@ -6,7 +6,6 @@ require('dotenv').config();
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
-
 const app = express();
 
 app.use(helmet());
@@ -17,6 +16,7 @@ app.use('/api/get-uuid', (req, res) =>{
     uuid: uuidv4()
   })
 });
+
 app.use('*', (req, res) => {
   res.status(400).send('not found')
 });
@@ -25,4 +25,6 @@ const IP = process.env.NODE_ENV === 'production' ? process.env.IP_PROD : process
 
 const serverHttp = createServer(app);
 
-serverHttp.listen(process.env.HTTP_PORT, IP);
+serverHttp.listen(process.env.HTTP_PORT, () => {
+  console.log(`server running on port ${process.env.HTTP_PORT}`);
+});

@@ -18,15 +18,10 @@ app.use('/api/get-uuid', (req, res) =>{
     uuid: uuidv4()
   })
 });
-app.use('/', (req, res) => {
-  res.sendFile(__dirname, '/public/app.html');
-});
 
 app.use('*', (req, res) => {
   res.status(400).send('not found')
 });
-
-const IP = process.env.NODE_ENV === 'production' ? process.env.IP_PROD : process.env.IP_DEV;
 
 const serverHttp = createServer(app);
 
